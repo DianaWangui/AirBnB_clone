@@ -2,7 +2,8 @@
 """A model that defines all common attributes."""
 import uuid
 from datetime import datetime
-from models.engine import storage #task 5
+from models.engine import storage  # task 5
+
 
 class BaseModel:
     """instantiating public instance attributes."""
@@ -16,22 +17,25 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key in ['created_at', 'updated_at']:
-                        value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                        value = datetime.strptime
+                        (value, '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, value)
 
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self) #task 5
+            storage.new(self)  # task 5
+
     def __str__(self):
         """ print the class_name id and dict in a specified format."""
-        return("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        return ("[{}] ({}) {}"
+                .format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
         """update the public instance updated_at with current time."""
         self.updated_at = datetime.now()
-        storage.save() #task 5
+        storage.save()  # task 5
 
     def to_dict(self):
         """return a dictionary containing all keys/values of __dict__"""
