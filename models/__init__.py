@@ -5,8 +5,10 @@ to create a unique FileStorage
 instance for your application
 """
 # task 5
-from .engine import file_storage
+# from .engine import file_storage
+# task 5
+from models.engine.file_storage import FileStorage
 
 
-storage = file_storage.FileStorage()
+storage = FileStorage()
 storage.reload()

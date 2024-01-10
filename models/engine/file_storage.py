@@ -47,6 +47,7 @@ class FileStorage:
         """
         deserializes the JSON file to __objects
         """
+
         # Create an empty dictionary
         if os.path.exists(self.__filepath):
             # Open the JSON file and load the data into the dictionary
