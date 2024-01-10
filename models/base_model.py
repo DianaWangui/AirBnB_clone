@@ -2,7 +2,7 @@
 """A model that defines all common attributes."""
 import uuid
 from datetime import datetime
-from models.engine import storage  # task 5
+import models  # task 5
 
 
 class BaseModel:
