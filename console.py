@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """A console model that is the entry point of cmd interpreter."""
 import cmd
+from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):

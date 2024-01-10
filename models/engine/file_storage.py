@@ -7,6 +7,7 @@ JSON file and deserializes JSON file to instances
 import os
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -40,8 +41,8 @@ class FileStorage:
         for key, value in self.__objects.items():
             json_objects[key] = value.to_dict()
             # Write JSON string to file
-            with open(self.__filepath, "w") as f:
-                json.dump(json_objects, f)
+        with open(self.__filepath, "w") as f:
+            json.dump(json_objects, f)
 
     def reload(self):
         """

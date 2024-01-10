@@ -14,3 +14,7 @@ class User(BaseModel):
     first_name: empty string
     last_name: empty string
     """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
