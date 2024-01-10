@@ -36,7 +36,7 @@ class FileStorage:
         serializes __objects to the JSON file
         """
         # convert object to JSON
-        json_objects = []
+        json_objects = {}
         for key, value in self.__objects.items():
             json_objects[key] = value.to_dict()
             # Write JSON string to file

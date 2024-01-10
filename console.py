@@ -7,6 +7,7 @@ class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
 
     prompt = "(hbnb)"
+
     def do_quit(self, command):
         """Exit the interpreter when ctr+D is presses."""
         return True
@@ -23,5 +24,6 @@ class HBNBCommand(cmd.Cmd):
         """Doing nothing"""
         pass
 
-if __name__== '__main__':
+
+if __name__ == '__main__':
     HBNBCommand().cmdloop()
