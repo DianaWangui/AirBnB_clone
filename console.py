@@ -23,5 +23,11 @@ class HBNBCommand(cmd.Cmd):
         """Doing nothing"""
         pass
 
+    def do_create(self, command):
+        """Instantiating a new create method to save in JSON."""
+        self.object = arg[0]
+        if self.object is None:
+            print("**class name missind **")
+        elif 
 if __name__== '__main__':
     HBNBCommand().cmdloop()
