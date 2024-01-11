@@ -14,7 +14,8 @@ from models.state import State
 
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
-    classes = { "BaseModel" : BaseModel
+    classes = { "BaseModel" : BaseModel,
+            "User": User
             }
 
     prompt = "(hbnb)"
