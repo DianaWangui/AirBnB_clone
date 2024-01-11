@@ -82,6 +82,19 @@ class HBNBCommand(cmd.Cmd):
                 del storage.all()[key]
                 storage.save()
 
+    def do_all(self, command):
+        """Prints all string rep of all instances based on class name."""
+        args = command.split()
+        if not args:
+            print([str(value) for key, value in storage.all().items()])
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        else:
+            result = [str(value) for key, value in storage.all().items()
+                if key.startswith(args[0] + '.')]
+
+            print(result)
+
 
 if __name__== '__main__':
     HBNBCommand().cmdloop()
