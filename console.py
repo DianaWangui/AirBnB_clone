@@ -2,6 +2,7 @@
 """A console model that is the entry point of cmd interpreter."""
 import cmd
 from models.base_model import BaseModel
+from models import storage
 from models.user import User #task8
 # task10
 from models.amenity import Amenity
@@ -47,6 +48,23 @@ class HBNBCommand(cmd.Cmd):
                 new_instance = self.classes[obj]()
             print("{}".format(new_instance.id))
             new_instance.save()
+
+    def do_show(self, command):
+        """print the string rep of an instance based on class name and id."""
+        args = command.split()
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            if key not in storage.all():
+                print("** no instance found **")
+            else:
+                print(storage.all()[key])
+
 
 if __name__== '__main__':
     HBNBCommand().cmdloop()
