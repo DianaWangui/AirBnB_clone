@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
 """
-A class that inherit from BaseModel
+A class that inherits from BaseModel
 """
 
 
@@ -21,8 +21,8 @@ class Place:
     amenity_ids: list of string - empty list: it will be the list of Amenity.id later
     """
 
-    city_id = ""
-    user_id = ""
+    city_id = ''
+    user_id = ''
     name = ""
     description = ""
     number_rooms = 0
