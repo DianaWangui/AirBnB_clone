@@ -5,7 +5,7 @@ from models.base_model import BaseModel
 a class User that inherits from BaseModel
 """
 
-
+# task 8
 class User(BaseModel):
     """
     Public class attributes:

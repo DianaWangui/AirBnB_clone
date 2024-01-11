@@ -2,7 +2,7 @@
 """A console model that is the entry point of cmd interpreter."""
 import cmd
 from models.base_model import BaseModel
-from models.user import User
+from models.user import User #task8
 
 
 class HBNBCommand(cmd.Cmd):
