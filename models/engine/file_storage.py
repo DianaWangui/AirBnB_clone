@@ -19,6 +19,8 @@ class FileStorage:
     __filepath = 'file.json'
     __objects = {}
 
+    our_classes = { "BaseModel" : BaseModel}
+
     def all(self):
         """
         returns the dictionary object
@@ -53,6 +55,9 @@ class FileStorage:
         if os.path.exists(self.__filepath):
             # Open the JSON file and load the data into the dictionary
             with open(self.__filepath, "r") as f:
-                json_objects = json.load(f)
+                obj_load = json.load(f)
+                for key, value in obj_load.items():
+                    class_name, object_id = key.split('.')
+                    self.__objects[key] = self.our_classes[class_name](**value)
                 # update __objects
-            self.__objects = json_objects
+            #self.__objects = json_objects.our_classes[class_name](**value)

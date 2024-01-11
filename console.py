@@ -7,6 +7,8 @@ from models.user import User #task8
 
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
+    classes = { "BaseModel" : BaseModel
+            }
 
     prompt = "(hbnb)"
 
@@ -28,11 +30,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, command):
         """Instantiating a new create method to save in JSON."""
-        self.object = arg[0]
-        if self.object is None:
-            print("**class name missind **")
-        elif
+        args = command.split()
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        else:
+            obj = args[0]
+            if obj in self.classes.keys():
+                new_instance = self.classes[obj]()
+            print("{}".format(new_instance.id))
+            new_instance.save()
 
-
-if __name__ == '__main__':
+if __name__== '__main__':
     HBNBCommand().cmdloop()
