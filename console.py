@@ -2,6 +2,14 @@
 """A console model that is the entry point of cmd interpreter."""
 import cmd
 from models.base_model import BaseModel
+from models.user import User #task8
+# task10
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+
 
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
@@ -9,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
             }
 
     prompt = "(hbnb)"
+
     def do_quit(self, command):
         """Exit the interpreter when ctr+D is presses."""
         return True
