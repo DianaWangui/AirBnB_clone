@@ -15,7 +15,12 @@ from models.state import State
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
     classes = { "BaseModel" : BaseModel,
-            "User": User
+            "User": User,
+            "State" : State,
+            "City" : City,
+            "Amenity" : Amenity,
+            "Place" : Place,
+            "Review" : Review
             }
 
     prompt = "(hbnb)"
@@ -26,6 +31,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, command):
         """Exit the interpreter when EOF or ctr+D is pressed."""
+        print()
         return True
 
     def help_quit(self):
@@ -47,8 +53,12 @@ class HBNBCommand(cmd.Cmd):
             obj = args[0]
             if obj in self.classes.keys():
                 new_instance = self.classes[obj]()
-            print("{}".format(new_instance.id))
-            new_instance.save()
+                if new_instance is not None:
+                    print("{}".format(new_instance.id))
+                    new_instance.save()
+                    #if new instance is not create
+                else:
+                    print("No instance was created")
 
     def do_show(self, command):
         """print the string rep of an instance based on class name and id."""
@@ -86,15 +96,17 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, command):
         """Prints all string rep of all instances based on class name."""
         args = command.split()
-        if not args:
-            print([str(value) for key, value in storage.all().items()])
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
-        else:
-            result = [str(value) for key, value in storage.all().items()
-                if key.startswith(args[0] + '.')]
-
-            print(result)
+        if not command:
+            obj_list = [str(value) for value in storage.all().values()]
+            print(obj_list)
+            return
+        else: 
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                result = [str(value) for key, value in storage.all().items()
+                        if key.startswith(args[0] + '.')]
+                print(result)
 
     def do_update(self, command):
         """Update an instance based on classname and id by adding/updating attr."""
