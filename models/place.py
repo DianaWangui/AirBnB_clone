@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 from models.base_model import BaseModel
 """
@@ -5,7 +6,7 @@ A class that inherits from BaseModel
 """
 
 
-class Place:
+class Place(BaseModel):
     """
     Public class attributes:
     city_id: empty string: it will be the City.id

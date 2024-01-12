@@ -5,7 +5,7 @@ A class that inherits from BaseModel
 """
 
 
-class City:
+class City(BaseModel):
     """
     Public class attributes:
     state_id: empty string: it will be the State.id

@@ -5,7 +5,7 @@ A class that inherits from BaseModel
 """
 
 
-class Amenity:
+class Amenity(BaseModel):
     """
     Public class attributes:
     name: empty string
