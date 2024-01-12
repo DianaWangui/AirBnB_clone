@@ -10,4 +10,4 @@ class Amenity(BaseModel):
     Public class attributes:
     name: empty string
     """
-    name = ''
+    name: str = ''

@@ -12,6 +12,6 @@ class Review(BaseModel):
     text: string - empty string
     """
 
-    place_id = ''
-    user_id = ''
-    text = ''
+    place_id: str = ''
+    user_id: str = ''
+    text: str = ''
