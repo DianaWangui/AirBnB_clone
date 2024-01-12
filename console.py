@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """A console model that is the entry point of cmd interpreter."""
 import cmd
+import shlex
 from models.base_model import BaseModel
 from models import storage
 from models.user import User #task8
@@ -23,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
             "Review" : Review
             }
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_quit(self, command):
         """Exit the interpreter when ctr+D is presses."""
@@ -44,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, command):
         """Instantiating a new create method to save in JSON."""
-        args = command.split()
+        args = shlex.split(command)
         if not args:
             print("** class name missing **")
         elif args[0] not in self.classes:
@@ -62,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, command):
         """print the string rep of an instance based on class name and id."""
-        args = command.split()
+        args = shlex.split(command)
         if not args:
             print("** class name missing **")
         elif args[0] not in self.classes:
@@ -78,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, command):
         """Delete an instance based on class name and id."""
-        args = command.split()
+        args = shlex.split(command)
         if not args:
             print("** class name missing **")
         if args[0] not in self.classes:
@@ -95,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, command):
         """Prints all string rep of all instances based on class name."""
-        args = command.split()
+        args = shlex.split(command)
         if not command:
             obj_list = [str(value) for value in storage.all().values()]
             print(obj_list)
@@ -110,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, command):
         """Update an instance based on classname and id by adding/updating attr."""
-        arg_list = command.split()
+        arg_list = shlex.split(command)
         if not command:
             print("** class name missing **")
 
@@ -118,14 +119,14 @@ class HBNBCommand(cmd.Cmd):
             class_name = arg_list[0]
             obj_id = arg_list[1]
             attribute_name = arg_list[2]
-            attribute_value = arg_list[3]
+            attribute_value = " ".join(arg_list[3:])
 
             key = class_name + "." + obj_id
             obj = storage.all().get(key)
 
             if not obj:
                 raise KeyError
-            setattr(obj, attribute_name, eval(attribute_value))
+            setattr(obj, attribute_name, attribute_value)
             obj.save()
         except IndexError:
             print("** instance id missing **")
