@@ -4,7 +4,7 @@ from models.base_model import BaseModel
 A class that inherits from BaseModel
 """
 
-class Review:
+class Review(BaseModel):
     """
     Public class attributes:
     place_id: string - empty string: it will be the Place.id
@@ -12,6 +12,6 @@ class Review:
     text: string - empty string
     """
 
-    place_id = ''
-    user_id = ''
-    text = ''
+    place_id: str = ''
+    user_id: str = ''
+    text: str = ''

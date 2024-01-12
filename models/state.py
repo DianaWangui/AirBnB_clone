@@ -10,4 +10,4 @@ class State(BaseModel):
     Public class attributes:
     name: empty string
     """
-    name = ""
+    name: str = ""

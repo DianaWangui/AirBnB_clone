@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """A console model that is the entry point of cmd interpreter."""
 import cmd
+import shlex
 from models.base_model import BaseModel
 from models import storage
 from models.user import User #task8
@@ -15,10 +16,15 @@ from models.state import State
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
     classes = { "BaseModel" : BaseModel,
-            "User": User
+            "User": User,
+            "State" : State,
+            "City" : City,
+            "Amenity" : Amenity,
+            "Place" : Place,
+            "Review" : Review
             }
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_quit(self, command):
         """Exit the interpreter when ctr+D is presses."""
@@ -26,6 +32,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, command):
         """Exit the interpreter when EOF or ctr+D is pressed."""
+        print()
         return True
 
     def help_quit(self):
@@ -38,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, command):
         """Instantiating a new create method to save in JSON."""
-        args = command.split()
+        args = shlex.split(command)
         if not args:
             print("** class name missing **")
         elif args[0] not in self.classes:
@@ -47,12 +54,16 @@ class HBNBCommand(cmd.Cmd):
             obj = args[0]
             if obj in self.classes.keys():
                 new_instance = self.classes[obj]()
-            print("{}".format(new_instance.id))
-            new_instance.save()
+                if new_instance is not None:
+                    print("{}".format(new_instance.id))
+                    new_instance.save()
+                    #if new instance is not create
+                else:
+                    print("No instance was created")
 
     def do_show(self, command):
         """print the string rep of an instance based on class name and id."""
-        args = command.split()
+        args = shlex.split(command)
         if not args:
             print("** class name missing **")
         elif args[0] not in self.classes:
@@ -68,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, command):
         """Delete an instance based on class name and id."""
-        args = command.split()
+        args = shlex.split(command)
         if not args:
             print("** class name missing **")
         if args[0] not in self.classes:
@@ -85,20 +96,22 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, command):
         """Prints all string rep of all instances based on class name."""
-        args = command.split()
-        if not args:
-            print([str(value) for key, value in storage.all().items()])
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
-        else:
-            result = [str(value) for key, value in storage.all().items()
-                if key.startswith(args[0] + '.')]
-
-            print(result)
+        args = shlex.split(command)
+        if not command:
+            obj_list = [str(value) for value in storage.all().values()]
+            print(obj_list)
+            return
+        else: 
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                result = [str(value) for key, value in storage.all().items()
+                        if key.startswith(args[0] + '.')]
+                print(result)
 
     def do_update(self, command):
         """Update an instance based on classname and id by adding/updating attr."""
-        arg_list = command.split()
+        arg_list = shlex.split(command)
         if not command:
             print("** class name missing **")
 
@@ -106,14 +119,14 @@ class HBNBCommand(cmd.Cmd):
             class_name = arg_list[0]
             obj_id = arg_list[1]
             attribute_name = arg_list[2]
-            attribute_value = arg_list[3]
+            attribute_value = " ".join(arg_list[3:])
 
             key = class_name + "." + obj_id
             obj = storage.all().get(key)
 
             if not obj:
                 raise KeyError
-            setattr(obj, attribute_name, eval(attribute_value))
+            setattr(obj, attribute_name, attribute_value)
             obj.save()
         except IndexError:
             print("** instance id missing **")
