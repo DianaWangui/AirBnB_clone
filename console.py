@@ -121,12 +121,10 @@ class HBNBCommand(cmd.Cmd):
     @staticmethod
     def class_count(class_name):
         """Count the number of classes in an instance."""
-        # initialize an empty set to store all unique class names
-        class_set = set()
 
-        for instance in storage.all().values():
-            class_set.add(instance.__class__.__name__)
-        return len(class_set)
+        instance_count = sum(1 for instance in storage.all().values()
+                if instance.__class__.__name__ == class_name)
+        return instance_count
 
 
     def default(self, line):
@@ -184,7 +182,6 @@ class HBNBCommand(cmd.Cmd):
             class_name (str): The name of the class.
             args_list (list): List of arguments for update command.
         """
-        print(args_list)
         if len(args_list) == 3:
             obj_id, attribute_name, attribute_value = args_list
             key = class_name + "." + obj_id
@@ -195,14 +192,6 @@ class HBNBCommand(cmd.Cmd):
                     attr_type = type(getattr(obj, attribute_name))
                     setattr(obj, attribute_name, attr_type(attribute_value))
                     obj.save()
-                else:
-                    print("attribute name missing")
-            else:
-                print("** no instance found **")
-
-        else:
-            print("Invalid no of args")
-
 
     def do_update(self, command):
         """Update an instance based on classname and id by adding/updating attr."""
