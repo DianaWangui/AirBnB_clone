@@ -134,10 +134,15 @@ class HBNBCommand(cmd.Cmd):
         # split the command with 1st instance of "." [User, all()]
         class_list = line.split(".", 1)
         # split the second command in class_list [all, )]
-        command = class_list[1].split("(", 1)
-    
+        command = class_list[1].split("(", 1)    
         # split the second command in command list with of "("
         class_id = command[1].split(")", 1)
+
+        # variables to handle the update method
+        class_name = class_list[0]
+        method = command[0]
+        args = command[1][:-1]  # getting all args with no paranthesis
+        args_list = [arg.strip('\'" ') for arg in args.split(",")]
 
 
         if len(class_list) < 2 and len(command) < 2:
@@ -167,8 +172,36 @@ class HBNBCommand(cmd.Cmd):
         if command[0] == self.cmd_list[3]:  # destroy
             self.do_destroy(class_list[0] + " " + class_id[0])
 
+        if command[0] == self.cmd_list[5]:
+            self.handle_update(class_name, args_list)
+            self.do_update(class_name + " " + " ".join(args_list))
 
 
+    def handle_update(self, class_name, args_list):
+        """
+        Handle the update command.
+        Args:
+            class_name (str): The name of the class.
+            args_list (list): List of arguments for update command.
+        """
+        print(args_list)
+        if len(args_list) == 3:
+            obj_id, attribute_name, attribute_value = args_list
+            key = class_name + "." + obj_id
+            obj = storage.all().get(key)
+            
+            if obj:
+                if hasattr(obj, attribute_name):
+                    attr_type = type(getattr(obj, attribute_name))
+                    setattr(obj, attribute_name, attr_type(attribute_value))
+                    obj.save()
+                else:
+                    print("attribute name missing")
+            else:
+                print("** no instance found **")
+
+        else:
+            print("Invalid no of args")
 
 
     def do_update(self, command):
