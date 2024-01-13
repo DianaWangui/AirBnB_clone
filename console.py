@@ -15,6 +15,8 @@ from models.state import State
 
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
+
+    # All classes
     classes = { "BaseModel" : BaseModel,
             "User": User,
             "State" : State,
@@ -23,7 +25,12 @@ class HBNBCommand(cmd.Cmd):
             "Place" : Place,
             "Review" : Review
             }
+    # list of all methods
     cmd_list = ["all", "create", "count", "destoy", "show", "update"]
+    # methods that need id passed
+    id_list = ["destoy", "show", "update"]
+    #method that dont need id passed
+    no_id_list = ["all", "count"]
 
     prompt = "(hbnb) "
 
@@ -124,9 +131,14 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """Overwriting the default method to handle more cases."""
+        # split the command with 1st instance of "." [User, all()]
         class_list = line.split(".", 1)
+        # split the second command in class_list [all, )]
         command = class_list[1].split("(", 1)
-        #print(class_list[0])
+    
+        # split the second command in command list with of "("
+        class_id = command[1].split(")", 1)
+
 
         if len(class_list) < 2 and len(command) < 2:
             print("Uknown syntax:{}".format(line))
@@ -134,8 +146,11 @@ class HBNBCommand(cmd.Cmd):
         if class_list[0] not in self.classes and command[0] not in self.cmd_list:
             print("Unknown syntax:{}".format(line))
             return False
-        if command[0] in ["all", "count"] and not command[1].startswith(")"):
+        if command[0] in self.no_id_list and not command[1].startswith(")"):
             print("Uknown syntax:{}".format(line))
+            return False
+        if command[0] in self.id_list and not command[1].endswith(")"):
+            print("Uknown syntax: {}".format(line))
             return False
 
         if command[0] == self.cmd_list[0]:
@@ -146,6 +161,8 @@ class HBNBCommand(cmd.Cmd):
             print(self.class_count(class_list[0]))
             return
 
+        if command[0] == self.cmd_list[4]:
+            self.do_show(class_list[0] + " " + class_id[0])
 
 
 
