@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
             "Review" : Review
             }
     # list of all methods
-    cmd_list = ["all", "create", "count", "destoy", "show", "update"]
+    cmd_list = ["all", "create", "count", "destroy", "show", "update"]
     # methods that need id passed
     id_list = ["destoy", "show", "update"]
     #method that dont need id passed
@@ -153,16 +153,19 @@ class HBNBCommand(cmd.Cmd):
             print("Uknown syntax: {}".format(line))
             return False
 
-        if command[0] == self.cmd_list[0]:
+        if command[0] == self.cmd_list[0]:  # all
             self.do_all(class_list[0])
             return
 
-        if command[0] == self.cmd_list[2]:
+        if command[0] == self.cmd_list[2]:  # count
             print(self.class_count(class_list[0]))
-            return
+            
 
-        if command[0] == self.cmd_list[4]:
+        if command[0] == self.cmd_list[4]:  # show
             self.do_show(class_list[0] + " " + class_id[0])
+
+        if command[0] == self.cmd_list[3]:  # destroy
+            self.do_destroy(class_list[0] + " " + class_id[0])
 
 
 
