@@ -23,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
             "Place" : Place,
             "Review" : Review
             }
+    cmd_list = ["all", "create", "count", "destoy", "show", "update"]
 
     prompt = "(hbnb) "
 
@@ -108,6 +109,47 @@ class HBNBCommand(cmd.Cmd):
                 result = [str(value) for key, value in storage.all().items()
                         if key.startswith(args[0] + '.')]
                 print(result)
+
+
+    @staticmethod
+    def class_count(class_name):
+        """Count the number of classes in an instance."""
+        # initialize an empty set to store all unique class names
+        class_set = set()
+
+        for instance in storage.all().values():
+            class_set.add(instance.__class__.__name__)
+        return len(class_set)
+
+
+    def default(self, line):
+        """Overwriting the default method to handle more cases."""
+        class_list = line.split(".", 1)
+        command = class_list[1].split("(", 1)
+        #print(class_list[0])
+
+        if len(class_list) < 2 and len(command) < 2:
+            print("Uknown syntax:{}".format(line))
+            return False
+        if class_list[0] not in self.classes and command[0] not in self.cmd_list:
+            print("Unknown syntax:{}".format(line))
+            return False
+        if command[0] in ["all", "count"] and not command[1].startswith(")"):
+            print("Uknown syntax:{}".format(line))
+            return False
+
+        if command[0] == self.cmd_list[0]:
+            self.do_all(class_list[0])
+            return
+
+        if command[0] == self.cmd_list[2]:
+            print(self.class_count(class_list[0]))
+            return
+
+
+
+
+
 
     def do_update(self, command):
         """Update an instance based on classname and id by adding/updating attr."""
