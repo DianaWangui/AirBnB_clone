@@ -200,29 +200,32 @@ class HBNBCommand(cmd.Cmd):
         arg_list = shlex.split(command)
         if not command:
             print("** class name missing **")
-        try:
-            class_name = arg_list[0]
-            obj_id = arg_list[1]
-            attribute_name = arg_list[2]
-            attribute_value = " ".join(arg_list[3:])
+        class_name = arg_list[0]
+        obj_id = arg_list[1]
+        attribute_name = arg_list[2]
+        attribute_value = " ".join(arg_list[3:])
 
-            key = class_name + "." + obj_id
-            obj = storage.all().get(key)
+        if class_name not in self.classes:
+            print("** class doesn't exist **")
+            return False
+        if len(arg_list) < 2:
+            print("** instance id missing **")
+            return False
+        if len(arg_list) < 3:
+            print("** attribute name missing **")
+            return False
+        if len(arg_list) < 4:
+            print("** value missing **")
+            return False
 
-            if not obj:
-                raise KeyError
+        key = class_name + "." + obj_id
+        obj = storage.all().get(key)
+
+        if not obj:
+            print("** no instance found **")
+        else:
             setattr(obj, attribute_name, attribute_value)
             obj.save()
-        except IndexError:
-            print("** instance id missing **")
-        except KeyError:
-            print("** no instance found **")
-        except NameError:
-            print("** class doesn't exist **")
-        except AttributeError:
-            print("** attribute name missing **")
-        except ValueError:
-            print("** value missing **")
 
 
 if __name__ == '__main__':
