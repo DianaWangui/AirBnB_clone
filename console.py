@@ -4,7 +4,7 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
-from models.user import User #task8
+from models.user import User  # task8
 # task10
 from models.amenity import Amenity
 from models.city import City
@@ -15,14 +15,14 @@ from models.state import State
 
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
-    classes = { "BaseModel" : BaseModel,
-            "User": User,
-            "State" : State,
-            "City" : City,
-            "Amenity" : Amenity,
-            "Place" : Place,
-            "Review" : Review
-            }
+    classes = {"BaseModel": BaseModel,
+               "User": User,
+               "State": State,
+               "City": City,
+               "Amenity": Amenity,
+               "Place": Place,
+               "Review": Review
+               }
 
     prompt = "(hbnb) "
 
@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
                 if new_instance is not None:
                     print("{}".format(new_instance.id))
                     new_instance.save()
-                    #if new instance is not create
+                    # if new instance is not create
                 else:
                     print("No instance was created")
 
@@ -101,16 +101,19 @@ class HBNBCommand(cmd.Cmd):
             obj_list = [str(value) for value in storage.all().values()]
             print(obj_list)
             return
-        else: 
+        else:
             if args[0] not in self.classes:
                 print("** class doesn't exist **")
             else:
                 result = [str(value) for key, value in storage.all().items()
-                        if key.startswith(args[0] + '.')]
+                          if key.startswith(args[0] + '.')]
                 print(result)
 
     def do_update(self, command):
-        """Update an instance based on classname and id by adding/updating attr."""
+        """
+        Update an instance based on classname
+        and id by adding/updating attr.
+        """
         arg_list = shlex.split(command)
         if not command:
             print("** class name missing **")
@@ -140,6 +143,5 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
 
 
-
-if __name__== '__main__':
+if __name__ == '__main__':
     HBNBCommand().cmdloop()

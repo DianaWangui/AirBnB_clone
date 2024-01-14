@@ -7,7 +7,7 @@ JSON file and deserializes JSON file to instances
 import os
 import json
 from models.base_model import BaseModel
-from models.user import User # task8
+from models.user import User  # task8
 # task10
 from models.amenity import Amenity
 from models.city import City
@@ -25,14 +25,14 @@ class FileStorage:
     __filepath = 'file.json'
     __objects = {}
 
-    our_classes = { "BaseModel" : BaseModel,
-            "State" : State,
-            "City" : City,
-            "Amenity" : Amenity,
-            "Place" : Place,
-            "Review" : Review,
-            "User" : User
-            }
+    our_classes = {"BaseModel": BaseModel,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review,
+                   "User": User
+                   }
 
     def all(self):
         """
@@ -73,4 +73,4 @@ class FileStorage:
                     class_name, object_id = key.split('.')
                     self.__objects[key] = self.our_classes[class_name](**value)
                 # update __objects
-            #self.__objects = json_objects.our_classes[class_name](**value)
+            # self.__objects = json_objects.our_classes[class_name](**value)

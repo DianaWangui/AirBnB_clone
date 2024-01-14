@@ -89,6 +89,64 @@ class Test_filestorage(unittest.TestCase):
         new_dict = self.file_storage.all()
         self.assertIn(key, new_dict)
 
+    def test_save_method(self):
+        """
+        test save method
+        """
+        a = Amenity()
+        b = BaseModel()
+        c = City()
+        p = Place()
+        r = Review()
+        s = State()
+        u = User()
+
+        self.file_storage.new(a)
+        self.file_storage.new(b)
+        self.file_storage.new(c)
+        self.file_storage.new(p)
+        self.file_storage.new(r)
+        self.file_storage.new(s)
+        self.file_storage.new(u)
+
+        self.file_storage.save()
+        # check if file exists
+        self.assertTrue(os.path.exists("file.json"))
+
+        # Test Reload Method
+    def test_reload(self):
+        """
+        test reload method
+        """
+        a = Amenity()
+        b = BaseModel()
+        c = City()
+        p = Place()
+        r = Review()
+        s = State()
+        u = User()
+
+        self.file_storage.new(a)
+        self.file_storage.new(b)
+        self.file_storage.new(c)
+        self.file_storage.new(p)
+        self.file_storage.new(r)
+        self.file_storage.new(s)
+        self.file_storage.new(u)
+
+        self.file_storage.save()
+
+        self.file_storage.reload()
+        object_dict = self.file_storage.all()
+
+        self.assertIn("Amenity." + a.id, object_dict)
+        self.assertIn("BaseModel." + b.id, object_dict)
+        self.assertIn("City." + c.id, object_dict)
+        self.assertIn("Place." + p.id, object_dict)
+        self.assertIn("Review." + r.id, object_dict)
+        self.assertIn("State." + s.id, object_dict)
+        self.assertIn("User." + u.id, object_dict)
+
 
 if '__name__ ' == '__main__':
     unittest.main()

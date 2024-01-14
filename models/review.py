@@ -4,6 +4,7 @@ from models.base_model import BaseModel
 A class that inherits from BaseModel
 """
 
+
 class Review(BaseModel):
     """
     Public class attributes:
