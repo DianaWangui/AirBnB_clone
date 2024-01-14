@@ -30,6 +30,30 @@ class TestHBNBCommandsMethods(unittest.TestCase):
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Quit command to exit the program")
 
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_emptyline_does_nothing(self, mock_stdout):
+        """Test that emptyline does nothing."""
+        command = HBNBCommand()
+        with patch('builtins.input', side_effect=['']):
+            command.emptyline()
+        self.assertEqual(mock_stdout.getvalue().strip(), "")
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_emptyline_with_nonempty_input(self, mock_stdout):
+        """Test emptyline does nothing with non empty input."""
+        command = HBNBCommand()
+        with patch('builtins.input', side_effect=['some command']):
+            command.emptyline()
+        self.assertEqual(mock_stdout.getvalue().strip(), "")
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_emptyline_with_multiple_newlines(self, mock_stdout):
+        """Test that emptyline does nothing with multiple newlines."""
+        command = HBNBCommand()
+        with patch('builtins.input', side_effect=['\n\n\n']):
+            command.emptyline()
+        self.assertEqual(mock_stdout.getvalue().strip(), "")
+
 
 if __name__ == '__main__':
     unittest.main()
