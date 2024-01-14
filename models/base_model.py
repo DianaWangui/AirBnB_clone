@@ -13,11 +13,13 @@ class BaseModel:
             - *args: this will not be used
             - **kwargs: dictionary with key and value args
         """
+        f_time = '%Y-%m-%dT%H:%M:%S.%f'
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key in ['created_at', 'updated_at']:
-                        setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                        setattr(self, key, datetime.strptime(value, f_time))
                     else:
                         setattr(self, key, value)
 

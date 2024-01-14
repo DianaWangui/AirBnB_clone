@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 from models.base_model import BaseModel
 """
@@ -19,10 +18,10 @@ class Place(BaseModel):
     price_by_night: integer - 0
     latitude: float - 0.0
     longitude: float - 0.0
-    amenity_ids: list of string - empty list: it will be the list of Amenity.id later
+    amenity_ids: list of string - empty list
     """
 
-    city_id: str  = ''
+    city_id: str = ''
     user_id: str = ''
     name: str = ""
     description: str = ""
