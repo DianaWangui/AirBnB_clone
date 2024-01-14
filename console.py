@@ -103,17 +103,20 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, command):
         """Print all string rep of all instances based on class name."""
         args = shlex.split(command)
-        if not command:
-            obj_list = [str(value) for value in storage.all().values()]
-            print(obj_list)
-            return
-        else:
-            if args[0] not in self.classes:
-                print("** class doesn't exist **")
+        try:
+            if not command:
+                obj_list = [str(value) for value in storage.all().values()]
+                print(obj_list)
+                return
             else:
-                result = [str(value) for key, value in storage.all().items()
-                          if key.startswith(args[0] + '.')]
-                print(result)
+                if args[0] not in self.classes:
+                    print("** class doesn't exist **")
+                else:
+                    result = [str(value) for key, value in storage.all().items()
+                            if key.startswith(args[0] + '.')]
+                    print(result)
+        except TypeError:
+            print("Command not found")
 
     @staticmethod
     def class_count(class_name):
@@ -126,19 +129,26 @@ class HBNBCommand(cmd.Cmd):
         """Overwrite the default method to handle more cases."""
         # split the command with 1st instance of "." [User, all()]
         class_list = line.split(".", 1)
+        if len(class_list) < 2:
+            print("Uknown syntax: {}".format(line))
+            return False
         # split the second command in class_list [all, )]
         command = class_list[1].split("(", 1)
+        if len(command) < 2:
+            print("Uknown syntax: {}".format(line))
+            return False
         # split the second command in command list with of "("
         class_id = command[1].split(")", 1)
+
         # variables to handle the update method
         class_name = class_list[0]
         method = command[0]
         args = command[1][:-1]  # getting all args with no paranthesis
         args_list = [arg.strip('\'" ') for arg in args.split(",")]
 
-        if len(class_list) < 2 and len(command) < 2:
-            print("Uknown syntax:{}".format(line))
-            return False
+        #if len(class_list) < 2 and len(command) < 2:
+            #print("Uknown syntax:{}".format(line))
+            #return False
         if class_name not in self.classes and method not in self.cmd_list:
             print("Unknown syntax:{}".format(line))
             return False
@@ -149,22 +159,23 @@ class HBNBCommand(cmd.Cmd):
             print("Uknown syntax: {}".format(line))
             return False
 
-        if method == self.cmd_list[0]:  # all
+        elif method == self.cmd_list[0]:  # all
             self.do_all(class_list[0])
-            return
 
-        if method == self.cmd_list[2]:  # count
+        elif method == self.cmd_list[2]:  # count
             print(self.class_count(class_list[0]))
 
-        if method == self.cmd_list[4]:  # show
+        elif method == self.cmd_list[4]:  # show
             self.do_show(class_list[0] + " " + class_id[0])
 
-        if method == self.cmd_list[3]:  # destroy
+        elif method == self.cmd_list[3]:  # destroy
             self.do_destroy(class_list[0] + " " + class_id[0])
 
-        if method == self.cmd_list[5]:
+        elif method == self.cmd_list[5]:
             self.handle_update(class_name, args_list)
             self.do_update(class_name + " " + " ".join(args_list))
+        else:
+            print("Unknown syntax: {}".format(line))
 
     def handle_update(self, class_name, args_list):
         """
