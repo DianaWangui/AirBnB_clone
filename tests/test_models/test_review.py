@@ -3,7 +3,7 @@ import unittest
 from models import review
 
 
-class test_city(unittest.TestCase):
+class Test_city(unittest.TestCase):
     def setUp(self):
         self.review_obj = review.Review()
 

@@ -3,7 +3,7 @@ import unittest
 from models import amenity
 
 
-class test_Amenity(unittest.TestCase):
+class Test_Amenity(unittest.TestCase):
     def setUp(self):
         self.amenity1 = amenity.Amenity()
 

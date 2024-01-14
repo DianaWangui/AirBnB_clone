@@ -3,7 +3,7 @@ import unittest
 from models import city
 
 
-class test_city(unittest.TestCase):
+class Test_city(unittest.TestCase):
     def setUp(self):
         self.city_obj = city.City()
 
