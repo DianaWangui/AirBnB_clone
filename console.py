@@ -62,9 +62,6 @@ class HBNBCommand(cmd.Cmd):
                 if new_instance is not None:
                     print("{}".format(new_instance.id))
                     new_instance.save()
-                    # if new instance is not create
-                else:
-                    print("No instance was created")
 
     def do_show(self, command):
         """Print the string rep of an instance based on class name and id."""
