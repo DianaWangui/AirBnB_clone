@@ -10,7 +10,7 @@ from models.base_model import BaseModel
 
 class Test_base_model(unittest.TestCase):
     """
-    Testing the base_model class and it's methods
+    Testing the BaseModel class and it's methods
     """
     def setUp(self):
         """
@@ -58,6 +58,7 @@ class Test_base_model(unittest.TestCase):
         self.assertEqual(str(self.base_model), self.base_model.__str__())
 
     def test_save_method(self):
+
         updated_time = self.base_model.updated_at
         self.base_model.save()
         self.assertEqual(updated_time, self.base_model.updated_at)
