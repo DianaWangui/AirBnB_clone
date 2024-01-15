@@ -101,20 +101,23 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, command):
         """Print all string rep of all instances based on class name."""
         args = shlex.split(command)
-        try:
-            if not command:
-                obj_list = [str(value) for value in storage.all().values()]
-                print(obj_list)
-                return
+        if not command:
+            obj_list = [str(value) for value in storage.all().values()]
+            print(obj_list)
+            return
+        else:
+            all_list = []
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
             else:
-                if args[0] not in self.classes:
-                    print("** class doesn't exist **")
-                else:
-                    result = [str(value) for key, value in storage.all().items()
-                            if key.startswith(args[0] + '.')]
-                    print(result)
-        except TypeError:
-            print("Command not found")
+                for k, value in storage.all().items():
+                    if args[0] == type(value).__name__:
+                            all_list.append(str(value))
+                print(all_list)
+                            
+               #  result = [str(value) for key, value in storage.all().items()
+                        # if key.startswith(args[0] + '.')]
+                # print(result)
 
     @staticmethod
     def class_count(class_name):
