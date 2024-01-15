@@ -59,9 +59,9 @@ class Test_base_model(unittest.TestCase):
 
     def test_save_method(self):
 
-        updated_time = self.base_model.updated_at
+        init_time = self.base_model.updated_at
         self.base_model.save()
-        self.assertEqual(updated_time, self.base_model.updated_at)
+        self.assertNotEqual(init_time, self.base_model.updated_at)
 
     def test_to_dict(self):
         """
