@@ -15,7 +15,8 @@ from models.state import State
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
     # All classes
-    classes = {"BaseModel": BaseModel,
+    classes = {
+                "BaseModel": BaseModel,
                 "User": User,
                 "State": State,
                 "City": City,
@@ -112,12 +113,8 @@ class HBNBCommand(cmd.Cmd):
             else:
                 for k, value in storage.all().items():
                     if args[0] == type(value).__name__:
-                            all_list.append(str(value))
+                        all_list.append(str(value))
                 print(all_list)
-                            
-               #  result = [str(value) for key, value in storage.all().items()
-                        # if key.startswith(args[0] + '.')]
-                # print(result)
 
     @staticmethod
     def class_count(class_name):
@@ -147,9 +144,6 @@ class HBNBCommand(cmd.Cmd):
         args = command[1][:-1]  # getting all args with no paranthesis
         args_list = [arg.strip('\'" ') for arg in args.split(",")]
 
-        #if len(class_list) < 2 and len(command) < 2:
-            #print("Uknown syntax:{}".format(line))
-            #return False
         if class_name not in self.classes and method not in self.cmd_list:
             print("Unknown syntax:{}".format(line))
             return False
