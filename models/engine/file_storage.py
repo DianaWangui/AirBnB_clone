@@ -31,7 +31,6 @@ class FileStorage:
                     "Place": Place,
                     "Review": Review,
                     "User": User}
-
     def all(self):
         """
         returns the dictionary object

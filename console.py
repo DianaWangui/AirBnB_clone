@@ -14,7 +14,6 @@ from models.state import State
 
 class HBNBCommand(cmd.Cmd):
     """A command line interpreter class."""
-
     # All classes
     classes = {"BaseModel": BaseModel,
                 "User": User,
@@ -29,7 +28,6 @@ class HBNBCommand(cmd.Cmd):
     id_list = ["destoy", "show", "update"]
     # method that dont need id passed
     no_id_list = ["all", "count"]
-
     prompt = "(hbnb) "
 
     def do_quit(self, command):

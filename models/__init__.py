@@ -6,8 +6,8 @@ instance for your application
 # task 5
 # from.engine import file_storage
 # task 5
-from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 storage = FileStorage()
 storage.reload()

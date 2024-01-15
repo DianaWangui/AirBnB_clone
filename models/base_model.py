@@ -14,7 +14,7 @@ class BaseModel:
             - **kwargs: dictionary with key and value args
         """
         f_time = '%Y-%m-%dT%H:%M:%S.%f'
-        time_format = "%Y-%m-%dT%H:%M:%S.%f"
+        # time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
