@@ -23,7 +23,7 @@
 .places h2 {
   font-size: 30px;
   text-align: center;
-  margin: 0px;
+  margin: 20px;
 }
 
 /*TASK 8*/
@@ -38,6 +38,51 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 5%;
-  right: 2%;
+  top: 3%;
+  right: 3%;
+}
+
+.information {
+  height: 80px;
+  border-top: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  display: flex;
+  justify-content: center;
+}
+
+.max_guest {
+  width: 100px;
+  background-image: url(../images/icon_guest.png);
+  background-repeat: no-repeat;
+  height: 100px;
+  background-position: center top;
+  line-height: 8em;
+  text-align: center;
+
+}
+
+.number_rooms {
+  width: 100px;
+  background-image: url(../images/icon_bed.png);
+  background-repeat: no-repeat;
+  height: 100px;
+  background-position: center top;
+  line-height: 8em;
+  text-align: center;
+
+}
+
+.number_bathrooms {
+  width: 100px;
+  background-image: url(../images/icon_bath.png);
+  background-repeat: no-repeat;
+  height: 100px;
+  background-position: center top;
+  line-height: 8em;
+  text-align: center;
+
+}
+
+.user {
+  margin: 20px auto;
 }
