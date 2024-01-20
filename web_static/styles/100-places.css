@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  text-align: left;
 }
 
 .places h1 {
@@ -87,35 +88,45 @@
 
 }
 
-.place .user {
-  margin: 20px auto;
+article .user {
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 /*TASK 100*/
 
-.places .amenities,
-.places .reviews {
+.amenities,
+.reviews {
   margin-top: 40px;
   text-align: left;
   padding: 0px;
-  margin-left: 0px;
+  margin: 0px;
 }
 
-.amenities h2,
 .reviews h2 {
   font-size: 16px;
   border-bottom: 1px solid #DDDDDD;
   text-align: left;
+  padding-bottom: 10px;
 }
 
-.place .amenities ul,
-li,
-.place .reviews ul,
-li {
+.amenities h2 {
+  font-size: 16px;
+  border-bottom: 1px solid #DDDDDD;
+  padding-bottom: 10px;
+}
+
+.reviews ul,
+.amenities ul {
   list-style: none;
   text-align: left;
-  align-items: flex-start;
+  margin-left: 0px;
 
+}
+
+.reviews ul li {
+  list-style: none;
+  text-align: left;
 }
 
 .place .reviews p,
