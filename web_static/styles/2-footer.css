@@ -2,11 +2,14 @@ footer {
   background-color: #00FF00;
   height: 60px;
   width: 100%;
-  position: absolute;
+  position: fixed;
+  /*update from absolute*/
   bottom: 0;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /*More updates for task 7/8*/
+  bottom: 0;
 }

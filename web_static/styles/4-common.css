@@ -10,6 +10,9 @@ body {
 .container {
   max-width: 1000px;
   margin: 30px auto;
+  /* addition styles for task 7/8*/
+  min-height: 100vh;
+  position: relative;
   /* margin-top: 30px;
   margin-bottom: 30px;
   margin-right: auto;
