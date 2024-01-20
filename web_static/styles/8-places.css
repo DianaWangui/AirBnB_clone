@@ -38,6 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /*position of the price tags*/
   top: 3%;
   right: 3%;
 }
