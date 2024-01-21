@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #484848;
+  font-size: 14px;
+  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  /* addition styles for task 7/8*/
+  min-height: 100vh;
+  position: relative;
+  /* margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto; */
+}

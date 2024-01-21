@@ -1,0 +1,107 @@
+.filters {
+  background-color: white;
+  height: 70px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.filters button {
+  font-size: 18px;
+  background-color: #FF5A5F;
+  color: #FFFFFF;
+  height: 48px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 30px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  right: 30px;
+
+}
+
+.filters button:hover {
+  opacity: 0.9;
+}
+
+.locations,
+.amenities {
+  height: 100%;
+  width: 25%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.locations {
+  border-right: 1px solid #DDDDDD;
+}
+
+.locations h3,
+.amenities h3 {
+  font-weight: 600;
+}
+
+.locations h4,
+.amenities h4 {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.locations h3,
+.amenities h3 {
+  margin: 3px 30px;
+}
+
+.amenities h4,
+.locations h4 {
+  margin: 3px 30px;
+
+}
+
+/* Task 6 */
+.popover {
+  background-color: #FAFAFA;
+  width: 100%;
+  border: 1px solid #DDDDDD;
+  display: none;
+  position: absolute;
+  border-radius: 4px;
+  z-index: 1;
+  top: 100%;
+
+}
+
+.popover h2 {
+  font-size: 16px;
+  margin: 10px;
+
+}
+
+.popover ul {
+  list-style: none;
+  margin-left: 20px;
+  padding: 0px;
+  text-align: left;
+}
+
+.locations:hover .popover,
+.amenities:hover .popover {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 0px;
+  margin-top: 0px;
+}
+
+.amenities .popover li {
+  padding: 1px;
+  margin-left: 20px;
+}
